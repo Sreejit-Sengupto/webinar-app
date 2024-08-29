@@ -1,0 +1,6 @@
+{
+    "watch": ["src", "client"],
+    "ignore": ["node_modules", "client/dist", "server/dist"],
+    "ext": "ts,tsx,js,jsx,json",
+    "exec": "cd client && npm run build && cd .. && tsc --build && node dist/index.js"
+}
