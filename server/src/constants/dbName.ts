@@ -1,0 +1,1 @@
+export const DB_NAME = process.env.ENV === 'production' ? 'PROD' : 'DEV'
