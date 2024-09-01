@@ -1,10 +1,17 @@
-import express from 'express'
-import path from 'path'
+import { app } from "./app"
+import connectDb from "./db"
 
-const app = express()
 
-app.use(express.json())
-
-app.use(express.static(path.join(__dirname, '../client/dist')))
-
-app.listen(3000, () => console.log('Server running on port 3000'))
+(
+    async () => {
+        const PORT = process.env.PORT
+        await connectDb()
+        try {
+            app.listen(PORT, () => {
+                console.log(`App listening on PORT: ${PORT}`);
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+)()
