@@ -3,19 +3,20 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 interface User {
-    username: string,
+    fullName: string,
     email: string,
     password: string,
     avatar?: string,
+    isVerified: boolean,
     refreshToken: string,
-    OTP: string,
-    OTPExpiry: Date,
-    passwordResetToken: string,
-    passwordResetTokenExpiry: Date
+    verificationCode: string | undefined,
+    verificationCodeExpiry: Date | undefined,
+    passwordResetToken: string | undefined,
+    passwordResetTokenExpiry: Date | undefined
 }
 
 const userSchema = new Schema<User>({
-    username: {
+    fullName: {
         type: String,
         required: true,
         unique: true,
@@ -32,9 +33,13 @@ const userSchema = new Schema<User>({
     avatar: {
         type: String
     },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
     refreshToken: String,
-    OTP: String,
-    OTPExpiry: Date,
+    verificationCode: String,
+    verificationCodeExpiry: Date,
     passwordResetToken: String,
     passwordResetTokenExpiry: Date
 },
